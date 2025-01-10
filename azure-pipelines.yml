@@ -13,9 +13,9 @@ variables:
   sqlconn: '$(sqlconnectionstrvar)'
   cosmosendpoint: '$(cosmosendpointvar)'
   cosmosauthkey: '$(cosmosauthkeyvar)'
-  storageaccconnstr: '$(storageaccconnstr)'
-  azservicebusconnstr: '$(azservicebusconnstr)'
-  kbntsnamespace: '$(kbntsnamespace)'
+  storageaccconnstrvar: '$(storageaccconnstr)'
+  azservicebusconnstrvar: '$(azservicebusconnstr)'
+  kbntsnamespacevar: '$(kbntsnamespace)'
 
 steps:
 - script: |
@@ -27,7 +27,7 @@ steps:
   displayName: Apply secret.yaml
   inputs:
     kubernetesServiceEndpoint: 'az-k8s-easy-kart'
-    namespace: '$(kbntsnamespace)'
+    namespace: '$(kbntsnamespacevar)'
     command: 'apply'
     arguments: '-f secret.yaml'
 
