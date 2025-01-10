@@ -15,7 +15,7 @@ variables:
   cosmosauthkey: '$(cosmosauthkeyvar)'
   storageaccconnstrvar: '$(storageaccconnstr)'
   azservicebusconnstrvar: '$(azservicebusconnstr)'
-  kbntsnamespacevar: '$(kbntsnamespace)'
+  kbntsnamespacevar: '$(namespacevar)'
 
 steps:
 - script: |
@@ -29,8 +29,8 @@ steps:
     sed -i 's/{{storageauthkeyvar}}/$(storageaccconnstrvar)/g' secret.yaml
     echo "Replacing {{azservicebusconnstrvar}} in deployment.yaml with $(azservicebusconnstrvar)"
     sed -i 's/{{azservicebusconnstrvar}}/$(azservicebusconnstrvar)/g' secret.yaml  
-    echo "Replacing {{namespacevar}} in deployment.yaml with $(namespacevar)"
-    sed -i 's/{{namespacevar}}/$(namespacevar)/g' secret.yaml  
+    echo "Replacing {{namespacevar}} in deployment.yaml with $(kbntsnamespacevar)"
+    sed -i 's/{{namespacevar}}/$(kbntsnamespacevar)/g' secret.yaml  
   displayName: Replace tag secret.yaml
 
 - task: Kubernetes@1
