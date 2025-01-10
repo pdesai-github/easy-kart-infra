@@ -28,9 +28,7 @@ steps:
     echo "Replacing {{storageauthkeyvar}} in deployment.yaml with $(storageaccconnstrvar)"
     sed -i 's/{{storageauthkeyvar}}/$(storageaccconnstrvar)/g' secret.yaml
     echo "Replacing {{azservicebusconnstrvar}} in deployment.yaml with $(azservicebusconnstrvar)"
-    sed -i 's/{{azservicebusconnstrvar}}/$(azservicebusconnstrvar)/g' secret.yaml
-    echo "Replacing {{namespacevar}} in deployment.yaml with $(kbntsnamespacevar)"
-    sed -i 's/{{namespacevar}}/$(kbntsnamespacevar)/g' secret.yaml
+    sed -i 's/{{azservicebusconnstrvar}}/$(azservicebusconnstrvar)/g' secret.yaml  
   displayName: Replace tag secret.yaml
 
 - task: Kubernetes@1
