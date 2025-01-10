@@ -21,6 +21,16 @@ steps:
 - script: |
     echo "Replacing {{sqlconnectionstrvar}} in deployment.yaml with $(sqlconn)"
     sed -i 's/{{sqlconnectionstrvar}}/$(sqlconn)/g' secret.yaml
+    echo "Replacing {{cosmosendpointvar}} in deployment.yaml with $(cosmosendpoint)"
+    sed -i 's/{{cosmosendpointvar}}/$(cosmosendpoint)/g' secret.yaml
+    echo "Replacing {{cosmosauthkeyvar}} in deployment.yaml with $(cosmosauthkey)"
+    sed -i 's/{{cosmosauthkeyvar}}/$(cosmosauthkey)/g' secret.yaml
+    echo "Replacing {{storageauthkeyvar}} in deployment.yaml with $(storageaccconnstrvar)"
+    sed -i 's/{{storageauthkeyvar}}/$(storageaccconnstrvar)/g' secret.yaml
+    echo "Replacing {{azservicebusconnstrvar}} in deployment.yaml with $(azservicebusconnstrvar)"
+    sed -i 's/{{azservicebusconnstrvar}}/$(azservicebusconnstrvar)/g' secret.yaml
+    echo "Replacing {{namespacevar}} in deployment.yaml with $(kbntsnamespacevar)"
+    sed -i 's/{{namespacevar}}/$(kbntsnamespacevar)/g' secret.yaml
   displayName: Replace tag secret.yaml
 
 - task: Kubernetes@1
