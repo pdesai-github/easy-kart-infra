@@ -1,0 +1,33 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  sqlconn: '$(sqlconnectionstrvar)'
+  cosmosendpoint: '$(cosmosendpointvar)'
+  cosmosauthkey: '$(cosmosauthkeyvar)'
+  storageaccconnstr: '$(storageaccconnstr)'
+  azservicebusconnstr: '$(azservicebusconnstr)'
+  kbntsnamespace: '$(kbntsnamespace)'
+
+steps:
+- script: |
+    echo "Replacing {{sqlconnectionstrvar}} in deployment.yaml with $(sqlconn)"
+    sed -i 's/{{sqlconnectionstrvar}}/$(sqlconn)/g' secret.yaml
+  displayName: Replace tag secret.yaml
+
+- task: Kubernetes@1
+  displayName: Apply secret.yaml
+  inputs:
+    kubernetesServiceEndpoint: 'az-k8s-easy-kart'
+    namespace: '$(kbntsnamespace)'
+    command: 'apply'
+    arguments: '-f secret.yaml'
+
