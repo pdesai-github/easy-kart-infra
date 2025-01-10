@@ -37,7 +37,7 @@ steps:
   displayName: Apply secret.yaml
   inputs:
     kubernetesServiceEndpoint: 'az-k8s-easy-kart'
-    namespace: '$(kbntsnamespacevar)'
+    namespace: 'easy-kart'
     command: 'apply'
     arguments: '-f secret.yaml'
 
